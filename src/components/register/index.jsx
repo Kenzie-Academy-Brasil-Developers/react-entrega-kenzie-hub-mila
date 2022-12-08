@@ -4,8 +4,11 @@ import Logo from "../../assets/img/logo-kenzie-hub.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 export function Register() {
+  const navigate = useNavigate();
+
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
@@ -23,6 +26,11 @@ export function Register() {
   const onSubmitFunction = (data) => console.log(data); //enviar p api - manipular os dados da forma que precisar;
 
   console.log(errors);
+
+  const registerButton = (event) => {
+    event.preventDefault();
+    navigate("/login");
+  };
   return (
     <StyleRegister>
       <div className="head">
@@ -59,7 +67,11 @@ export function Register() {
         <select name="" id="">
           <option value="">Primeiro módulo</option>
         </select>
-        <button type="submit" className="button-negative">
+        <button
+          type="submit"
+          className="button-negative"
+          onClick={registerButton}
+        >
           Cadastrar
         </button>
       </form>

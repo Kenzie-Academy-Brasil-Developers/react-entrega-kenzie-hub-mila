@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyleLogin = styled.div`
+  margin-top: 90px;
   width: 300px;
   height: 800px;
 

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyleRegister = styled.div`
+  margin-top: 40px;
   width: 300px;
   height: 800px;
 

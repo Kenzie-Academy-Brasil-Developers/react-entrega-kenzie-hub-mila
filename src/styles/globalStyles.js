@@ -32,8 +32,9 @@ export const GlobalStyle = createGlobalStyle`
 
     body{
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        margin-top: 30px;
+        align-items: center;
         background-color: var(--color-grey-4);
     }
 
@@ -72,6 +73,10 @@ export const GlobalStyle = createGlobalStyle`
         color: var(--color-grey-0);
         margin-top: 20px;
         margin-bottom: 10px;
+    }
+
+    .container{
+        max-width: 900px;
     }
 
     .button-pink{

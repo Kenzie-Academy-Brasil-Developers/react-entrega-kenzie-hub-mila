@@ -4,8 +4,14 @@ import Logo from "../../assets/img/logo-kenzie-hub.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
+/* import { Api } from "../../services/api";
+import { toast, ToastContainer } from "react-toastify"; */
+import "react-toastify/dist/ReactToastify.css";
 
 export function Login() {
+  const navigate = useNavigate();
+
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
@@ -23,6 +29,17 @@ export function Login() {
   const onSubmitFunction = (data) => console.log(data); //enviar p api - manipular os dados da forma que precisar;
 
   console.log(errors);
+
+  const loginButton = (event) => {
+    event.preventDefault();
+    navigate("/dashboard");
+  };
+
+  const backToRegister = (event) => {
+    event.preventDefault();
+    navigate("/");
+  };
+
   return (
     <StyleLogin>
       <div className="head">
@@ -42,11 +59,13 @@ export function Login() {
           {...register("password")}
         />
         {errors.password?.message}
-        <button type="submit" className="button-pink">
+        <button type="submit" className="button-pink" onClick={loginButton}>
           Entrar
         </button>
         <small>Ainda não possui uma conta? </small>
-        <button className="button-grey">Cadastre-se</button>
+        <button className="button-grey" onClick={backToRegister}>
+          Cadastre-se
+        </button>
       </form>
     </StyleLogin>
   );
