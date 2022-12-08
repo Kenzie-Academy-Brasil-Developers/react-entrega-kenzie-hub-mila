@@ -62,7 +62,7 @@ export function Login() {
         <button type="submit" className="button-pink" onClick={loginButton}>
           Entrar
         </button>
-        <small>Ainda não possui uma conta? </small>
+        <small>Ainda não possui uma conta?? </small>
         <button className="button-grey" onClick={backToRegister}>
           Cadastre-se
         </button>
