@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-/* import { Api } from "../../services/api";
-import { toast, ToastContainer } from "react-toastify"; */
 import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../../context/userContext";
 
@@ -26,17 +24,12 @@ export function Login() {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-  const onSubmitFunction = (data) => login(data); //enviar p api - manipular os dados da forma que precisar;
+  const onSubmitFunction = (data) => login(data);
 
-  /* const loginButton = (event) => {
-    event.preventDefault();
-    navigate("/home");
-  }; */
-
-  /* const backToRegister = (event) => {
+  const backToRegister = (event) => {
     event.preventDefault();
     navigate("/");
-  }; */
+  };
 
   return (
     <StyleLogin>
@@ -53,6 +46,7 @@ export function Login() {
         {errors.email?.message}
         <label htmlFor="">Senha</label>
         <input
+          type="password"
           placeholder="Digite aqui sua senha..."
           {...register("password")}
         />
@@ -64,7 +58,7 @@ export function Login() {
           Entrar
         </button>
         <small>Ainda não possui uma conta?? </small>
-        <button className="button-grey" /* onClick={backToRegister} */>
+        <button className="button-grey" onClick={backToRegister}>
           Cadastre-se
         </button>
       </form>

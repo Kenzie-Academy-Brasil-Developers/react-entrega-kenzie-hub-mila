@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { createContext } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "../components/services/api";
 
-export const UserContext = createContext({});
+export const TechContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [userState, setUserstate] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadUser() {
@@ -34,35 +32,6 @@ export const UserProvider = ({ children }) => {
     loadUser();
   }, [loading]);
 
-  async function createAccount(data) {
-    try {
-      console.log(data);
-      const response = await api.post("/users", data);
-      console.log(response);
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function login(data) {
-    try {
-      console.log(data);
-      const response = await api.post("/sessions", data);
-
-      const { token, user } = await response.data;
-      setUserstate(user);
-      localStorage.setItem("token", token);
-
-      console.log(response);
-      console.log(token);
-      console.log(userState);
-      navigate("/home");
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function createCard(data2) {
     setLoading(true);
     const token = localStorage.getItem("token");
@@ -79,10 +48,8 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider
-      value={{ userState, createAccount, login, loading, createCard }}
-    >
+    <TechContext.Provider value={{ userState, loading, createCard }}>
       {children}
-    </UserContext.Provider>
+    </TechContext.Provider>
   );
 };

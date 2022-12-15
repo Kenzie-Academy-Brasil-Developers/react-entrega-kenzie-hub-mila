@@ -4,12 +4,10 @@ import Logo from "../../assets/img/logo-kenzie-hub.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 
 export function Register() {
   const { createAccount } = useContext(UserContext);
-  const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
@@ -25,9 +23,7 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-  const onSubmitFunction = (data) => createAccount(data); //enviar p api - manipular os dados da forma que precisar;
-
-  // console.log(errors);
+  const onSubmitFunction = (data) => createAccount(data);
 
   return (
     <StyleRegister>

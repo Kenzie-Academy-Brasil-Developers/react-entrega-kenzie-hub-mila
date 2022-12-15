@@ -2,36 +2,38 @@ import React, { useState } from "react";
 import { StyleCard } from "./style";
 import imgPlus from "../../assets/img/Button Plus.svg";
 import trash from "../../assets/img/trash.svg";
-import ModalRegister from "../../components/modais/edit";
+import ModalRegister from "../../components/modais/register";
 
 const Card = ({ userState }) => {
+  const [shoModal, setShoModal] = useState(false);
   console.log(userState);
   return (
     <StyleCard>
-      <div className="headCard container">
+      {shoModal && <ModalRegister />}
+      <div className="headCard ">
         <p>Tecnologias</p>
         <img
           onClick={() => {
-            <ModalRegister />;
+            setShoModal(true);
           }}
           src={imgPlus}
           alt=""
         />
       </div>
       <ul>
-        {userState.techs.map((item) => (
-          <li>
-            <div className="mainCard container">
+        <li className="li container">
+          <div className="mainCard ">
+            {userState.techs.map((item) => (
               <div className="miniCard">
-                <p className="title">{item}</p>
+                <p className="title">{item.title}</p>
                 <div className="editCard">
-                  <small>Level</small>
+                  <small>{item.status}</small>
                   <img src={trash} alt="" className="trash" />
                 </div>
               </div>
-            </div>
-          </li>
-        ))}
+            ))}
+          </div>
+        </li>
       </ul>
     </StyleCard>
   );

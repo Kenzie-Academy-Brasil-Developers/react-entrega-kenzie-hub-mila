@@ -45,5 +45,12 @@ export const StyleHome = styled.div`
     .container {
       max-width: 80%;
     }
+
+    .div-line {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      border-bottom: solid 1px var(--color-grey-2);
+    }
   }
 `;

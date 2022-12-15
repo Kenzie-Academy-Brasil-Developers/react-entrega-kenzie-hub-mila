@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const StyleCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   .headCard {
     display: flex;
     align-items: center;
@@ -19,6 +23,13 @@ export const StyleCard = styled.div`
     font-size: 16px;
   }
 
+  .li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2000px;
+  }
+
   .mainCard {
     background-color: var(--color-grey-3);
     height: 400px;
@@ -27,6 +38,8 @@ export const StyleCard = styled.div`
     border-radius: 4px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    width: 100%;
   }
 
   .miniCard {
@@ -34,7 +47,7 @@ export const StyleCard = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 50px;
+    min-height: 50px;
     border-radius: 4px;
     background-color: var(--color-grey-4);
     padding: 0 20px 0 20px;
@@ -54,5 +67,23 @@ export const StyleCard = styled.div`
 
   .title {
     font-size: 14px;
+  }
+
+  @media (max-width: 1100px) {
+    .container {
+      max-width: 80%;
+    }
+
+    .li {
+      width: 150%;
+    }
+
+    .headCard {
+      width: 150%;
+    }
+
+    .mainCard {
+      min-width: 180%;
+    }
   }
 `;
