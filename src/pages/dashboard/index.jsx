@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleDashboard } from "./style";
 import Header from "../../components/header";
+import { UserContext } from "../../context/userContext";
+import { Navigate } from "react-router-dom";
 
 const Dashboard = () => {
-  return (
+  const { userState } = useContext(UserContext);
+  console.log(userState);
+  return userState ? (
     <StyleDashboard>
       <Header />
       <div className="div-line">
@@ -23,6 +27,8 @@ const Dashboard = () => {
         </p>
       </div>
     </StyleDashboard>
+  ) : (
+    <Navigate to="/" />
   );
 };
 

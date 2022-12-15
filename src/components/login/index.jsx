@@ -1,4 +1,5 @@
 import React from "react";
+import { useContext } from "react";
 import { StyleLogin } from "./style";
 import Logo from "../../assets/img/logo-kenzie-hub.svg";
 import { useForm } from "react-hook-form";
@@ -8,16 +9,15 @@ import { useNavigate } from "react-router-dom";
 /* import { Api } from "../../services/api";
 import { toast, ToastContainer } from "react-toastify"; */
 import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../../context/userContext";
 
 export function Login() {
+  const { login } = useContext(UserContext);
   const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Nome obrigatório"),
-    email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
+    email: yup.string().required("Nome obrigatório"),
     password: yup.string().required("Senha obrigatória"),
-    passwordConfirm: yup.string().required("Senha obrigatória"),
-    bio: yup.string().required("Preencha o campo"),
   });
   const {
     register,
@@ -26,19 +26,17 @@ export function Login() {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-  const onSubmitFunction = (data) => console.log(data); //enviar p api - manipular os dados da forma que precisar;
+  const onSubmitFunction = (data) => login(data); //enviar p api - manipular os dados da forma que precisar;
 
-  console.log(errors);
-
-  const loginButton = (event) => {
+  /* const loginButton = (event) => {
     event.preventDefault();
-    navigate("/dashboard");
-  };
+    navigate("/home");
+  }; */
 
-  const backToRegister = (event) => {
+  /* const backToRegister = (event) => {
     event.preventDefault();
     navigate("/");
-  };
+  }; */
 
   return (
     <StyleLogin>
@@ -59,11 +57,14 @@ export function Login() {
           {...register("password")}
         />
         {errors.password?.message}
-        <button type="submit" className="button-pink" onClick={loginButton}>
+        <button
+          type="submit"
+          className="button-pink" /* onClick={loginButton} */
+        >
           Entrar
         </button>
         <small>Ainda não possui uma conta?? </small>
-        <button className="button-grey" onClick={backToRegister}>
+        <button className="button-grey" /* onClick={backToRegister} */>
           Cadastre-se
         </button>
       </form>

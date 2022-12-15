@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleRegister } from "./style";
 import Logo from "../../assets/img/logo-kenzie-hub.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 export function Register() {
+  const { createAccount } = useContext(UserContext);
   const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
     password: yup.string().required("Senha obrigatória"),
-    passwordConfirm: yup.string().required("Senha obrigatória"),
     bio: yup.string().required("Preencha o campo"),
+    contact: yup.string().required("Contato obrigatório"),
   });
   const {
     register,
@@ -23,14 +25,10 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-  const onSubmitFunction = (data) => console.log(data); //enviar p api - manipular os dados da forma que precisar;
+  const onSubmitFunction = (data) => createAccount(data); //enviar p api - manipular os dados da forma que precisar;
 
-  console.log(errors);
+  // console.log(errors);
 
-  const registerButton = (event) => {
-    event.preventDefault();
-    navigate("/login");
-  };
   return (
     <StyleRegister>
       <div className="head">
@@ -50,28 +48,32 @@ export function Register() {
         {errors.email?.message}
         <label htmlFor="">Senha</label>
         <input
+          type="password"
           placeholder="Digite aqui sua senha..."
           {...register("password")}
         />
         {errors.password?.message}
-        <label htmlFor="">Confirmar senha</label>
-        <input
-          placeholder="Confirme aqui sua senha..."
-          {...register("passwordConfirm")}
-        />
-        {errors.passwordConfirm?.message}
         <label htmlFor="">Bio</label>
-        <input placeholder="Fale sobre você" {...register("bio")} />
+        <input type="text" placeholder="Fale sobre você" {...register("bio")} />
         {errors.bio?.message}
+
+        <label htmlFor="">Contato</label>
+        <input
+          type="number"
+          placeholder="Opção de contato"
+          {...register("contact")}
+        />
+        {errors.contact?.message}
+
         <label htmlFor="">Selecionar módulos</label>
-        <select name="" id="">
-          <option value="">Primeiro módulo</option>
+        <select name="" {...register("course_module")}>
+          <option value="1">Primeiro módulo</option>
+          <option value="2o Módulo (Frontend avançado)">
+            2o Módulo (Frontend avançado)
+          </option>
+          <option value="3">Terceiro módulo</option>
         </select>
-        <button
-          type="submit"
-          className="button-negative"
-          onClick={registerButton}
-        >
+        <button type="submit" className="button-negative">
           Cadastrar
         </button>
       </form>
