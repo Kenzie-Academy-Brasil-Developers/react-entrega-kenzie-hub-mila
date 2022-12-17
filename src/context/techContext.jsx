@@ -36,11 +36,9 @@ export const UserProvider = ({ children }) => {
     setLoading(true);
     const token = localStorage.getItem("token");
     try {
-      console.log(data2);
       const response = await api.post("/users/techs", data2, {
         headers: { authorization: `Bearer ${token}` },
       });
-      console.log(response);
       setLoading(false);
     } catch (error) {
       console.log(error);

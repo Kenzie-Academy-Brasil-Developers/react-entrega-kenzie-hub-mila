@@ -51,10 +51,7 @@ export function Login() {
           {...register("password")}
         />
         {errors.password?.message}
-        <button
-          type="submit"
-          className="button-pink" /* onClick={loginButton} */
-        >
+        <button type="submit" className="button-pink">
           Entrar
         </button>
         <small>Ainda não possui uma conta?? </small>

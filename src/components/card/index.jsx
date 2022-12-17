@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleCard } from "./style";
 import imgPlus from "../../assets/img/Button Plus.svg";
 import trash from "../../assets/img/trash.svg";
 import ModalRegister from "../../components/modais/register";
+import { UserContext } from "../../context/userContext";
 
 const Card = ({ userState }) => {
+  const { deletCard } = useContext(UserContext);
+
   const [shoModal, setShoModal] = useState(false);
-  console.log(userState);
   return (
     <StyleCard>
       {shoModal && <ModalRegister />}
@@ -28,7 +30,14 @@ const Card = ({ userState }) => {
                 <p className="title">{item.title}</p>
                 <div className="editCard">
                   <small>{item.status}</small>
-                  <img src={trash} alt="" className="trash" />
+                  <img
+                    src={trash}
+                    alt=""
+                    className="trash"
+                    onClick={() => {
+                      deletCard(item.id);
+                    }}
+                  />
                 </div>
               </div>
             ))}

@@ -3,11 +3,10 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 
 export const ProtectedRoutes = () => {
-  const { userState, loading } = useContext(UserContext);
+  const { autoLogin, loading } = useContext(UserContext);
 
   if (loading) {
     return null;
   }
-  console.log(userState);
-  return userState ? <Outlet /> : <Navigate to="/login" />;
+  return autoLogin ? <Outlet /> : <Navigate to="/login" />;
 };

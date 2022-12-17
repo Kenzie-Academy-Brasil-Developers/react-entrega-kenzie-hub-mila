@@ -4,8 +4,6 @@ import { UserContext } from "../../context/userContext";
 import { StyleHome } from "./style";
 import Header from "../../components/header";
 import Card from "../../components/card";
-import { Navigate } from "react-router-dom";
-import ModalEdit from "../../components/modais/edit";
 
 export const Home = () => {
   const { userState, loading } = useContext(UserContext);
@@ -13,8 +11,7 @@ export const Home = () => {
   if (loading) {
     return null;
   }
-  console.log(userState);
-  return userState ? (
+  return (
     <StyleHome>
       <Header />
       <div className="div-line">
@@ -28,8 +25,6 @@ export const Home = () => {
       <Card userState={userState} />
       {/* <ModalEdit /> */}
     </StyleHome>
-  ) : (
-    <Navigate to="/login" />
   );
 };
 

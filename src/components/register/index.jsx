@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 export function Register() {
   const { createAccount } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
@@ -29,7 +31,14 @@ export function Register() {
     <StyleRegister>
       <div className="head">
         <img src={Logo} alt="" />
-        <button className="button-dark">Voltar</button>
+        <button
+          className="button-dark"
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Voltar
+        </button>
       </div>
       <form className="form" onSubmit={handleSubmit(onSubmitFunction)}>
         <div className="title">

@@ -27,7 +27,7 @@ export const StyleCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2000px;
+    width: 897px;
   }
 
   .mainCard {
@@ -83,7 +83,7 @@ export const StyleCard = styled.div`
     }
 
     .mainCard {
-      min-width: 180%;
+      width: 100%;
     }
   }
 `;
